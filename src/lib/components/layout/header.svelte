@@ -8,7 +8,6 @@
 	import { toggleMode } from 'mode-watcher';
 	import Moon from '@lucide/svelte/icons/moon';
 	import Sun from '@lucide/svelte/icons/sun';
-	import { navigationMenuTriggerStyle } from '$lib/components/ui/navigation-menu/navigation-menu-trigger.svelte';
 	import * as Kbd from '$lib/components/ui/kbd/index.js';
 
 	let open = $state(false);
@@ -22,25 +21,18 @@
 </script>
 
 <svelte:document onkeydown={handleKeydown} />
-
-<header class="fixed top-0 left-0 z-10 w-full border-b p-4 backdrop-blur-md">
+<header class="fixed top-0 left-0 z-10 w-full border-b bg-background p-4">
 	<div class="flex w-full items-center">
+		<a href="/">
+			<img alt="Skyrocket" src={skyrocket} class="mr-2 size-6 select-none" />
+		</a>
 		<NavigationMenu.Root viewport={true}>
 			<NavigationMenu.List>
-				<NavigationMenu.Item>
-					<NavigationMenu.Link>
-						{#snippet child({ props })}
-							<a {...props} href="/" class={navigationMenuTriggerStyle()}>
-								<img alt="Skyrocket" src={skyrocket} class="size-8 select-none" /></a
-							>
-						{/snippet}
-					</NavigationMenu.Link>
-				</NavigationMenu.Item>
 				{#each routes as { label, items }}
 					<NavigationMenu.Item>
-						<NavigationMenu.Trigger class="bg-inherit">{label}</NavigationMenu.Trigger>
+						<NavigationMenu.Trigger>{label}</NavigationMenu.Trigger>
 						<NavigationMenu.Content>
-							<ul class="grid w-[200px] p-2">
+							<ul class="grid w-md grid-cols-3 p-2">
 								<li>
 									{#each items as { href, title }}
 										<NavigationMenu.Link {href}>
@@ -57,13 +49,13 @@
 		<Button
 			onclick={() => (open = true)}
 			size="sm"
-			variant="outline"
+			variant="secondary"
 			class="mr-2 ml-auto w-full max-w-3xs"
 		>
 			Search...
 			<Kbd.Group class="ml-auto">
-				<Kbd.Root class="border">⌘</Kbd.Root>
-				<Kbd.Root class="border">K</Kbd.Root>
+				<Kbd.Root class="border bg-background">⌘</Kbd.Root>
+				<Kbd.Root class="border bg-background">K</Kbd.Root>
 			</Kbd.Group>
 		</Button>
 		<Command.Dialog bind:open>
@@ -72,6 +64,7 @@
 				<Command.Empty>No results found.</Command.Empty>
 				{#each routes as { label, items }}
 					<Command.Group heading={label}>
+						<Command.Separator />
 						{#each items as { href, title }}
 							<a {href}>
 								<Command.Item>{title}</Command.Item>
@@ -84,6 +77,7 @@
 		<Button
 			href="https://github.com/natebabyak/skyrocket"
 			size="icon-lg"
+			target="_blank"
 			title="GitHub"
 			variant="ghost"
 		>

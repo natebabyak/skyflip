@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CopyButton from '$lib/components/table/copy-button.svelte';
+	import CopyButton from '$lib/components/copy-button.svelte';
 	import { formatCoins } from '$lib/helpers/format-coins';
 	import { formatNumber } from '$lib/helpers/format-number';
 	import * as Table from '$lib/components/ui/table/index.js';

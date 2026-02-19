@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { columns } from './columns.js';
-	import DataTable from '$lib/components/data-table/DataTable.svelte';
+	import DataTable from './data-table.svelte';
 
 	let { data } = $props();
 </script>

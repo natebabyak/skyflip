@@ -1,7 +1,5 @@
 <script lang="ts" generics="TData, TValue">
 	import { Button } from '$lib/components/ui/button/index.js';
-	import ChevronLeftIcon from '@lucide/svelte/icons/chevron-left';
-	import ChevronRightIcon from '@lucide/svelte/icons/chevron-right';
 	import {
 		type ColumnDef,
 		type ColumnFiltersState,
@@ -13,9 +11,14 @@
 		type SortingState
 	} from '@tanstack/table-core';
 	import { createSvelteTable, FlexRender } from '$lib/components/ui/data-table/index.js';
-	import { Input } from '$lib/components/ui/input/index.js';
+	import * as Empty from '$lib/components/ui/empty/index.js';
+	import * as InputGroup from '$lib/components/ui/input-group/index.js';
 	import * as Pagination from '$lib/components/ui/pagination/index.js';
+	import Panda from '@lucide/svelte/icons/panda';
+	import RotateCcw from '@lucide/svelte/icons/rotate-ccw';
+	import Search from '@lucide/svelte/icons/search';
 	import * as Table from '$lib/components/ui/table/index.js';
+	import X from '@lucide/svelte/icons/x';
 
 	type DataTableProps<TData, TValue> = {
 		columns: ColumnDef<TData, TValue>[];
@@ -24,7 +27,10 @@
 
 	let { columns, data }: DataTableProps<TData, TValue> = $props();
 
-	let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 15 });
+	let pagination = $state<PaginationState>({
+		pageIndex: 0,
+		pageSize: 20
+	});
 	let sorting = $state<SortingState>([]);
 	let columnFilters = $state<ColumnFiltersState>([]);
 
@@ -34,10 +40,17 @@
 		},
 		// svelte-ignore state_referenced_locally
 		columns,
+		getFilteredRowModel: getFilteredRowModel(),
 		getCoreRowModel: getCoreRowModel(),
 		getPaginationRowModel: getPaginationRowModel(),
 		getSortedRowModel: getSortedRowModel(),
-		getFilteredRowModel: getFilteredRowModel(),
+		onColumnFiltersChange: (updater) => {
+			if (typeof updater === 'function') {
+				columnFilters = updater(columnFilters);
+			} else {
+				columnFilters = updater;
+			}
+		},
 		onPaginationChange: (updater) => {
 			if (typeof updater === 'function') {
 				pagination = updater(pagination);
@@ -52,59 +65,48 @@
 				sorting = updater;
 			}
 		},
-		onColumnFiltersChange: (updater) => {
-			if (typeof updater === 'function') {
-				columnFilters = updater(columnFilters);
-			} else {
-				columnFilters = updater;
-			}
-		},
 		state: {
+			get columnFilters() {
+				return columnFilters;
+			},
 			get pagination() {
 				return pagination;
 			},
 			get sorting() {
 				return sorting;
-			},
-			get columnFilters() {
-				return columnFilters;
 			}
 		}
 	});
 </script>
 
-<div class="grid gap-2 p-4">
-	<div class="flex justify-between">
-		<Input
-			placeholder="Search items..."
-			value={(table.getColumn('item')?.getFilterValue() as string) ?? ''}
+<div class="grid gap-2 p-4 md:gap-4">
+	<InputGroup.Root class="w-full max-w-xs">
+		<InputGroup.Input
 			onchange={(e) => {
 				table.getColumn('item')?.setFilterValue(e.currentTarget.value);
 			}}
 			oninput={(e) => {
 				table.getColumn('item')?.setFilterValue(e.currentTarget.value);
 			}}
-			class="max-w-sm"
+			placeholder="Search items..."
+			value={(table.getColumn('item')?.getFilterValue() as string) ?? ''}
 		/>
-		<div class="flex gap-2">
-			<Button
-				disabled={!table.getCanPreviousPage()}
-				onclick={() => table.previousPage()}
-				size="icon"
-				variant="outline"
-			>
-				<ChevronLeftIcon />
-			</Button>
-			<Button
-				disabled={!table.getCanNextPage()}
-				onclick={() => table.nextPage()}
-				size="icon"
-				variant="outline"
-			>
-				<ChevronRightIcon />
-			</Button>
-		</div>
-	</div>
+		<InputGroup.Addon align="inline-start">
+			<Search />
+		</InputGroup.Addon>
+		{#if (table.getColumn('item')?.getFilterValue() as string) ?? '' !== ''}
+			<InputGroup.Addon align="inline-end">
+				<InputGroup.Button
+					onclick={() => {
+						table.getColumn('item')?.setFilterValue('');
+					}}
+					size="icon-xs"
+				>
+					<X />
+				</InputGroup.Button>
+			</InputGroup.Addon>
+		{/if}
+	</InputGroup.Root>
 	<div class="rounded-md border">
 		<Table.Root>
 			<Table.Header>
@@ -125,8 +127,8 @@
 			</Table.Header>
 			<Table.Body>
 				{#each table.getRowModel().rows as row (row.id)}
-					<Table.Row data-state={row.getIsSelected() && 'selected'}>
-						{#each row.getVisibleCells() as cell (cell.id)}
+					<Table.Row>
+						{#each row.getAllCells() as cell}
 							<Table.Cell>
 								<FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
 							</Table.Cell>
@@ -134,20 +136,42 @@
 					</Table.Row>
 				{:else}
 					<Table.Row>
-						<Table.Cell colspan={columns.length} class="h-24 text-center">No results.</Table.Cell>
+						<Table.Cell colspan={columns.length}>
+							<Empty.Root>
+								<Empty.Header>
+									<Empty.Media variant="icon">
+										<Panda />
+									</Empty.Media>
+									<Empty.Title>No items found</Empty.Title>
+									<Empty.Description>Try relaxing your filters</Empty.Description>
+								</Empty.Header>
+								<Empty.Content>
+									<Button
+										onclick={() => {
+											table.getColumn('item')?.setFilterValue('');
+										}}
+									>
+										<RotateCcw />
+										Reset Filters
+									</Button>
+								</Empty.Content>
+							</Empty.Root>
+						</Table.Cell>
 					</Table.Row>
 				{/each}
 			</Table.Body>
 		</Table.Root>
 	</div>
-	<Pagination.Root count={data.length} perPage={15}>
-		{#snippet children({ pages, currentPage })}
+	<Pagination.Root
+		page={table.getState().pagination.pageIndex + 1}
+		count={table.getRowCount()}
+		perPage={table.getState().pagination.pageSize}
+		class="grid gap-2 md:gap-4"
+	>
+		{#snippet children({ currentPage, pages, range })}
 			<Pagination.Content>
 				<Pagination.Item>
-					<Pagination.PrevButton
-						disabled={!table.getCanPreviousPage()}
-						onclick={() => table.previousPage()}
-					/>
+					<Pagination.PrevButton />
 				</Pagination.Item>
 				{#each pages as page (page.key)}
 					{#if page.type === 'ellipsis'}
@@ -167,12 +191,13 @@
 					{/if}
 				{/each}
 				<Pagination.Item>
-					<Pagination.NextButton
-						disabled={!table.getCanNextPage()}
-						onclick={() => table.nextPage()}
-					/>
+					<Pagination.NextButton />
 				</Pagination.Item>
 			</Pagination.Content>
+			<span class="mx-auto text-sm text-muted-foreground">
+				Showing {range.start} to {range.end} of {table.getRowCount()}
+				{table.getRowCount() === 1 ? 'row' : 'rows'}
+			</span>
 		{/snippet}
 	</Pagination.Root>
 </div>

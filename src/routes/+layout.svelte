@@ -17,7 +17,7 @@
 <ModeWatcher />
 <Tooltip.Provider>
 	<Header />
-	<main class="mx-auto w-full pt-[68px] md:w-2xl lg:w-4xl">
+	<main class="pt-18.25">
 		{@render children()}
 	</main>
 	<Footer />
