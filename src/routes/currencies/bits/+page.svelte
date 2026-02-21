@@ -11,25 +11,27 @@
 	<title>Bits - Skyrocket</title>
 </svelte:head>
 
-<Table.Root>
-	<Table.Header>
-		<Table.Row>
-			<Table.Head>Item</Table.Head>
-			<Table.Head class="text-right">Bits Cost</Table.Head>
-			<Table.Head class="text-right">Price</Table.Head>
-			<Table.Head class="text-right">Coins/Bit</Table.Head>
-		</Table.Row>
-	</Table.Header>
-	<Table.Body>
-		{#each data.rows as { icon, name, copyText, bitsCost, price, coinsPerBit }}
+<main class="mt-18.25">
+	<Table.Root>
+		<Table.Header>
 			<Table.Row>
-				<Table.Cell>
-					<CopyButton {icon} {name} {copyText} />
-				</Table.Cell>
-				<Table.Cell class="text-right">{formatNumber(bitsCost)}</Table.Cell>
-				<Table.Cell class="text-right">{formatCoins(price)}</Table.Cell>
-				<Table.Cell class="text-right">{formatCoins(coinsPerBit)}</Table.Cell>
+				<Table.Head>Item</Table.Head>
+				<Table.Head class="text-right">Bits Cost</Table.Head>
+				<Table.Head class="text-right">Price</Table.Head>
+				<Table.Head class="text-right">Coins/Bit</Table.Head>
 			</Table.Row>
-		{/each}
-	</Table.Body>
-</Table.Root>
+		</Table.Header>
+		<Table.Body>
+			{#each data.rows as { icon, name, copyText, bitsCost, price, coinsPerBit }}
+				<Table.Row>
+					<Table.Cell>
+						<CopyButton {icon} {name} {copyText} />
+					</Table.Cell>
+					<Table.Cell class="text-right">{formatNumber(bitsCost)}</Table.Cell>
+					<Table.Cell class="text-right">{formatCoins(price)}</Table.Cell>
+					<Table.Cell class="text-right">{formatCoins(coinsPerBit)}</Table.Cell>
+				</Table.Row>
+			{/each}
+		</Table.Body>
+	</Table.Root>
+</main>

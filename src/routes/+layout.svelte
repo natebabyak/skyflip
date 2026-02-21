@@ -1,24 +1,22 @@
 <script lang="ts">
 	import './layout.css';
+	import skyrocket from '$lib/assets/skyrocket.png';
 	import Footer from '$lib/components/layout/footer.svelte';
 	import Header from '$lib/components/layout/header.svelte';
 	import { ModeWatcher } from 'mode-watcher';
 	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
-	import favicon from '$lib/assets/favicon.svg';
 
 	let { children } = $props();
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+	<link rel="icon" href={skyrocket} />
 	<title>Skyrocket</title>
-	<meta name="description" content="WIP" />
+	<meta name="description" content="" />
 </svelte:head>
 <ModeWatcher />
 <Tooltip.Provider>
 	<Header />
-	<main class="pt-18.25">
-		{@render children()}
-	</main>
+	{@render children()}
 	<Footer />
 </Tooltip.Provider>

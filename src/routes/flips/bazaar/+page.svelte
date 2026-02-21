@@ -9,4 +9,6 @@
 	<title>Bazaar Flips - Skyrocket</title>
 </svelte:head>
 
-<DataTable data={data.rows} {columns} />
+<main class="mt-18.25">
+	<DataTable data={data.rows} {columns} />
+</main>
