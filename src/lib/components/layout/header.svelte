@@ -1,15 +1,14 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
-	import Github from '$lib/components/icons/github.svelte';
-	import * as NavigationMenu from '$lib/components/ui/navigation-menu/index.js';
-	import skyrocket from '$lib/assets/skyrocket.png';
-	import routes from '$lib/data/routes.json';
 	import * as Command from '$lib/components/ui/command/index.js';
-	import { toggleMode } from 'mode-watcher';
-	import Moon from '@lucide/svelte/icons/moon';
-	import Sun from '@lucide/svelte/icons/sun';
+	import Github from '$lib/components/icons/github.svelte';
 	import * as Kbd from '$lib/components/ui/kbd/index.js';
-	import * as InputGroup from '$lib/components/ui/input-group/index.js';
+	import Moon from '@lucide/svelte/icons/moon';
+	import * as NavigationMenu from '$lib/components/ui/navigation-menu/index.js';
+	import routes from '$lib/data/routes.json';
+	import skyrocket from '$lib/assets/skyrocket.png';
+	import Sun from '@lucide/svelte/icons/sun';
+	import { toggleMode } from 'mode-watcher';
 
 	let open = $state(false);
 
@@ -22,8 +21,8 @@
 </script>
 
 <svelte:document onkeydown={handleKeydown} />
-<header class="fixed top-0 left-0 z-10 w-full border-b bg-background p-4">
-	<div class="flex w-full max-w-7xl items-center">
+<header class="fixed top-0 left-0 z-10 w-full border-b bg-background px-8 py-4">
+	<div class="flex w-full items-center">
 		<a href="/" class="mr-2">
 			<img alt="Skyrocket" src={skyrocket} class="size-8 select-none" />
 		</a>
