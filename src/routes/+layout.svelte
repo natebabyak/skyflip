@@ -1,20 +1,22 @@
 <script lang="ts">
-	import '../app.css';
-	import Footer from '$lib/components/footer/Footer.svelte';
-	import Header from '$lib/components/header/Header.svelte';
+	import './layout.css';
+	import skyrocket from '$lib/assets/skyrocket.png';
+	import Footer from '$lib/components/layout/footer.svelte';
+	import Header from '$lib/components/layout/header.svelte';
 	import { ModeWatcher } from 'mode-watcher';
-	import { Toaster } from '$lib/components/ui/sonner/index.js';
 	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
 
 	let { children } = $props();
 </script>
 
+<svelte:head>
+	<link rel="icon" href={skyrocket} />
+	<title>Skyrocket</title>
+	<meta name="description" content="" />
+</svelte:head>
 <ModeWatcher />
-<Toaster />
 <Tooltip.Provider>
 	<Header />
-	<main class="mx-auto w-full pt-[68px] md:w-2xl lg:w-4xl">
-		{@render children()}
-	</main>
+	{@render children()}
 	<Footer />
 </Tooltip.Provider>

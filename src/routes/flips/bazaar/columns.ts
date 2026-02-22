@@ -1,8 +1,7 @@
 import type { ColumnDef } from '@tanstack/table-core';
-import { renderComponent } from '$lib/components/ui/data-table/index.js';
-import DataTableHeader from '$lib/components/data-table/DataTableHeader.svelte';
-import DataTableNumberCell from '$lib/components/data-table/DataTableNumberCell.svelte';
-import DataTableCopyCell from '$lib/components/data-table/DataTableCopyCell.svelte';
+import { createRawSnippet } from 'svelte';
+import DataTableCopyCell from '$lib/components/data-table-copy-cell.svelte';
+import { renderComponent, renderSnippet } from '$lib/components/ui/data-table/index.js';
 
 export type Column = {
 	item: string;
@@ -16,11 +15,7 @@ export type Column = {
 export const columns: ColumnDef<Column>[] = [
 	{
 		accessorKey: 'item',
-		header: ({ column }) =>
-			renderComponent(DataTableHeader, {
-				column,
-				headerText: 'Item'
-			}),
+		header: 'Item',
 		cell: ({ row }) => {
 			const item = row.getValue<string>('item');
 
@@ -32,67 +27,112 @@ export const columns: ColumnDef<Column>[] = [
 	},
 	{
 		accessorKey: 'buyPrice',
-		header: ({ column }) =>
-			renderComponent(DataTableHeader, {
-				column,
-				headerText: 'Buy Price'
-			}),
-		cell: ({ row }) =>
-			renderComponent(DataTableNumberCell, {
-				format: 'coins',
-				value: row.getValue<number>('buyPrice')
-			})
+		header: () => {
+			return renderSnippet(
+				createRawSnippet(() => {
+					return {
+						render: () => '<div class="text-end">Buy Price</div>'
+					};
+				})
+			);
+		},
+		cell: ({ row }) => {
+			return renderSnippet(
+				createRawSnippet(() => {
+					return {
+						render: () =>
+							`<div class="text-end">${row.original.buyPrice.toLocaleString('en-US')}</div>`
+					};
+				})
+			);
+		}
 	},
 	{
 		accessorKey: 'sellPrice',
-		header: ({ column }) =>
-			renderComponent(DataTableHeader, {
-				column,
-				headerText: 'Sell Price'
-			}),
-		cell: ({ row }) =>
-			renderComponent(DataTableNumberCell, {
-				format: 'coins',
-				value: row.getValue<number>('sellPrice')
-			})
+		header: () => {
+			return renderSnippet(
+				createRawSnippet(() => {
+					return {
+						render: () => '<div class="text-end">Sell Price</div>'
+					};
+				})
+			);
+		},
+		cell: ({ row }) => {
+			return renderSnippet(
+				createRawSnippet(() => {
+					return {
+						render: () =>
+							`<div class="text-end">${row.original.sellPrice.toLocaleString('en-US')}</div>`
+					};
+				})
+			);
+		}
 	},
 	{
 		accessorKey: 'profit',
-		header: ({ column }) =>
-			renderComponent(DataTableHeader, {
-				column,
-				headerText: 'Profit'
-			}),
-		cell: ({ row }) =>
-			renderComponent(DataTableNumberCell, {
-				format: 'coins',
-				value: row.getValue<number>('profit')
-			})
+		header: () => {
+			return renderSnippet(
+				createRawSnippet(() => {
+					return {
+						render: () => '<div class="text-end">Profit/Flip</div>'
+					};
+				})
+			);
+		},
+		cell: ({ row }) => {
+			return renderSnippet(
+				createRawSnippet(() => {
+					return {
+						render: () =>
+							`<div class="text-end">${row.original.profit.toLocaleString('en-US')}</div>`
+					};
+				})
+			);
+		}
 	},
 	{
 		accessorKey: 'flipsPerHour',
-		header: ({ column }) =>
-			renderComponent(DataTableHeader, {
-				column,
-				headerText: 'Flips/h'
-			}),
-		cell: ({ row }) =>
-			renderComponent(DataTableNumberCell, {
-				format: 'number',
-				value: row.getValue<number>('flipsPerHour')
-			})
+		header: () => {
+			return renderSnippet(
+				createRawSnippet(() => {
+					return {
+						render: () => '<div class="text-end">Flips/h</div>'
+					};
+				})
+			);
+		},
+		cell: ({ row }) => {
+			return renderSnippet(
+				createRawSnippet(() => {
+					return {
+						render: () =>
+							`<div class="text-end">${row.original.flipsPerHour.toLocaleString('en-US')}</div>`
+					};
+				})
+			);
+		}
 	},
 	{
 		accessorKey: 'profitPerHour',
-		header: ({ column }) =>
-			renderComponent(DataTableHeader, {
-				column,
-				headerText: 'Profit/h'
-			}),
-		cell: ({ row }) =>
-			renderComponent(DataTableNumberCell, {
-				format: 'coins',
-				value: row.getValue<number>('profitPerHour')
-			})
+		header: () => {
+			return renderSnippet(
+				createRawSnippet(() => {
+					return {
+						render: () => '<div class="text-end">Profit/h</div>'
+					};
+				})
+			);
+		},
+		cell: ({ row }) => {
+			return renderSnippet(
+				createRawSnippet(() => {
+					return {
+						render: () =>
+							`<div class="text-end">${row.original.profitPerHour.toLocaleString('en-US')}</div>`
+					};
+				})
+			);
+		}
 	}
 ];
