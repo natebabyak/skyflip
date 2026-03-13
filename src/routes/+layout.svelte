@@ -1,6 +1,6 @@
 <script lang="ts">
 	import './layout.css';
-	import skyrocket from '$lib/assets/skyrocket.png';
+	import skyflip from '$lib/assets/skyflip.png';
 	import Footer from '$lib/components/layout/footer.svelte';
 	import Header from '$lib/components/layout/header.svelte';
 	import { ModeWatcher } from 'mode-watcher';
@@ -10,8 +10,8 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={skyrocket} />
-	<title>Skyrocket</title>
+	<link rel="icon" href={skyflip} />
+	<title>SkyFlip</title>
 	<meta name="description" content="" />
 </svelte:head>
 <ModeWatcher />

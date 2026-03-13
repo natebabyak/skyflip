@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-	<title>Home - Skyrocket</title>
+	<title>Home - SkyFlip</title>
 </svelte:head>
 
 <main class="mx-auto mt-18.25 flex flex-col border-x md:max-w-2xl">
@@ -21,7 +21,7 @@
 			To The Endgame.
 		</h1>
 		<p class="text-lg text-balance text-muted-foreground">
-			Skyrocket has all the tools you need to help you make informed financial decisions in Hypixel
+			SkyFlip has all the tools you need to help you make informed financial decisions in Hypixel
 			SkyBlock.
 		</p>
 	</div>
@@ -44,7 +44,7 @@
 			<p class="text-balance text-muted-foreground">
 				More features and improvements are on the way!
 			</p>
-			<Button href="https://github.com/natebabyak/skyrocket" target="_blank" class="mt-auto"
+			<Button href="https://github.com/natebabyak/skyflip" target="_blank" class="mt-auto"
 				>View on GitHub</Button
 			>
 		</div>

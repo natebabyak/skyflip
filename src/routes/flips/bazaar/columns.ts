@@ -41,7 +41,10 @@ export const columns: ColumnDef<Column>[] = [
 				createRawSnippet(() => {
 					return {
 						render: () =>
-							`<div class="text-end">${row.original.buyPrice.toLocaleString('en-US')}</div>`
+							`<div class="text-end">${row.original.buyPrice.toLocaleString('en-US', {
+								minimumFractionDigits: 1,
+								maximumFractionDigits: 1
+							})}</div>`
 					};
 				})
 			);
@@ -63,7 +66,10 @@ export const columns: ColumnDef<Column>[] = [
 				createRawSnippet(() => {
 					return {
 						render: () =>
-							`<div class="text-end">${row.original.sellPrice.toLocaleString('en-US')}</div>`
+							`<div class="text-end">${row.original.sellPrice.toLocaleString('en-US', {
+								minimumFractionDigits: 1,
+								maximumFractionDigits: 1
+							})}</div>`
 					};
 				})
 			);
@@ -85,7 +91,10 @@ export const columns: ColumnDef<Column>[] = [
 				createRawSnippet(() => {
 					return {
 						render: () =>
-							`<div class="text-end">${row.original.profit.toLocaleString('en-US')}</div>`
+							`<div class="text-end">${row.original.profit.toLocaleString('en-US', {
+								minimumFractionDigits: 1,
+								maximumFractionDigits: 1
+							})}</div>`
 					};
 				})
 			);
@@ -129,7 +138,10 @@ export const columns: ColumnDef<Column>[] = [
 				createRawSnippet(() => {
 					return {
 						render: () =>
-							`<div class="text-end">${row.original.profitPerHour.toLocaleString('en-US')}</div>`
+							`<div class="text-end">${row.original.profitPerHour.toLocaleString('en-US', {
+								minimumFractionDigits: 1,
+								maximumFractionDigits: 1
+							})}</div>`
 					};
 				})
 			);

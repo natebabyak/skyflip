@@ -1,10 +1,10 @@
 <a id="top"></a>
 
 <div align="center">
-  <a href="https://github.com/natebabyak/skyrocket">
-    <img src="./static/favicon.png" alt="Skyrocket Logo" height="80" width="80" />
+  <a href="https://github.com/natebabyak/skyflip">
+    <img src="./static/favicon.png" alt="SkyFlip Logo" height="80" width="80" />
   </a>
-  <h3>Skyrocket</h3>
+  <h3>SkyFlip</h3>
 </div>
 
 <details>
@@ -24,11 +24,7 @@
       </ul>
     </li>
     <li>
-      <a href="#usage">Usage</a>
-      <ul>
-        <li><a href="#bits">Bits</a></li>
-        <li><a href="#bazaar">Bazaar</a></li>
-      </ul>
+      <a href="#screenshots">Screenshots</a>
     </li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -40,11 +36,11 @@
 
 ## About
 
-Skyrocket is a free and open-source web app that provides real-time market insights for Hypixel SkyBlock, built as a modern successor to [SkyFlip](https://github.com/natebabyak/skyflip).
+SkyFlip is a free and open-source web app that provides real-time market insights for Hypixel SkyBlock.
 
-While other similar tools exist, many are hindered by clunky interfaces or poor performance—issues Skyrocket was designed to address with a clean UI and fast, responsive experience.
+While other similar tools exist, many are hindered by clunky interfaces or poor performance—issues SkyFlip was designed to address with a clean UI and fast, responsive experience.
 
-The project includes two fully functional pages (see [Usage](#usage)) and serves as a solid reference or starting point for developers building similar tools (see [Installation](#installation)). Although development is complete, the codebase remains available for learning, forking, or extending.
+The project includes two fully functional pages and serves as a solid reference or starting point for developers building similar tools (see [Installation](#installation)). Although development is complete, the codebase remains available for learning, forking, or extending.
 
 <p align="right"><a href="#top">Back to Top</a></p>
 
@@ -82,7 +78,7 @@ The project includes two fully functional pages (see [Usage](#usage)) and serves
 1. Clone the repository
 
    ```bash
-   git clone https://github.com/natebabyak/skyrocket.git
+   git clone https://github.com/natebabyak/skyflip.git
    ```
 
 2. Install the dependencies
@@ -99,11 +95,14 @@ The project includes two fully functional pages (see [Usage](#usage)) and serves
 
 <p align="right"><a href="#top">Back to Top</a></p>
 
-## Usage
+## Screenshots
 
-### Bits (`/currencies/bits`)
+<figure align="center">
+  <img src="./static/home.png" alt="Home Screenshot" />
+  <figcaption>Screenshot of Home (<code>/</code>)</figcaption>
+</figure>
 
-Displays optimal Bits usage based on profitability after tax.
+<div align="right"><a href="#top">Back to Top</a></div>
 
 <figure align="center">
   <img src="./static/bits.png" alt="Bits Screenshot" />
@@ -111,10 +110,6 @@ Displays optimal Bits usage based on profitability after tax.
 </figure>
 
 <div align="right"><a href="#top">Back to Top</a></div>
-
-### Bazaar (`/flips/bazaar`)
-
-Displays top Bazaar spread flips with filtering, pagination, and sortable columns.
 
 <figure align="center">
   <img src="./static/bazaar.png" alt="Bazaar Screenshot" />
@@ -125,7 +120,7 @@ Displays top Bazaar spread flips with filtering, pagination, and sortable column
 
 ## License
 
-Distributed under the MIT License. See [`LICENSE.txt`](https://github.com/natebabyak/skyrocket/blob/main/LICENSE.txt) for more information.
+Distributed under the MIT License. See [`LICENSE.txt`](https://github.com/natebabyak/skyflip/blob/main/LICENSE.txt) for more information.
 
 <div align="right"><a href="#top">Back to Top</a></div>
 

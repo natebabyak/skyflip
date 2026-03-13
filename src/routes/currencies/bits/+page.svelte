@@ -6,11 +6,11 @@
 </script>
 
 <svelte:head>
-	<title>Bits - Skyrocket</title>
+	<title>Bits - SkyFlip</title>
 </svelte:head>
 
 <main class="mt-18.25 p-4">
-	<div class="rounded-md border">
+	<div class="mx-auto w-full max-w-2xl rounded-md border">
 		<Table.Root>
 			<Table.Header>
 				<Table.Row>
@@ -21,7 +21,7 @@
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>
-				{#each data.rows as { icon, name, copyText, bitsCost, price, coinsPerBit }}
+				{#each data.rows as { icon, name, copyText, bitsCost, price, coinsPerBit }, i (i)}
 					<Table.Row>
 						<Table.Cell>
 							<CopyButton {icon} {name} {copyText} />

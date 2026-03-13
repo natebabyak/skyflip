@@ -24,7 +24,7 @@
 					<Slash />
 					Home
 				</Button>
-				<Button href="https://github.com/natebabyak/skyrocket" target="_blank" variant="outline">
+				<Button href="https://github.com/natebabyak/skyflip" target="_blank" variant="outline">
 					<Github />
 					GitHub
 				</Button>

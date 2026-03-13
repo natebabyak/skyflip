@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Bazaar Flips - Skyrocket</title>
+	<title>Bazaar Flips - SkyFlip</title>
 </svelte:head>
 
 <main class="mt-18.25">

@@ -38,6 +38,7 @@
 		get data() {
 			return data;
 		},
+		// eslint-disable-next-line svelte/no-unused-svelte-ignore
 		// svelte-ignore state_referenced_locally
 		columns,
 		getFilteredRowModel: getFilteredRowModel(),
@@ -79,7 +80,7 @@
 	});
 </script>
 
-<div class="grid gap-2 p-4 md:gap-4">
+<div class="mx-auto grid w-full max-w-5xl gap-2 p-4 md:gap-4">
 	<InputGroup.Root class="w-full max-w-xs">
 		<InputGroup.Input
 			onchange={(e) => {
@@ -128,7 +129,7 @@
 			<Table.Body>
 				{#each table.getRowModel().rows as row (row.id)}
 					<Table.Row>
-						{#each row.getAllCells() as cell}
+						{#each row.getAllCells() as cell, i (i)}
 							<Table.Cell>
 								<FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
 							</Table.Cell>
